@@ -15,30 +15,31 @@
                 recycled trash
             -->
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Let's Find Out Your Current Sustainability!</title>
-</head>
-
-<body>
-    <div>
-        <form name="quiz" method="POST">
-            {% csrf_token %}
-
-            {% for question in QUIZLIST %}
-                {{ question }}
-                <!--Input Field Goes Here-->
-            {% endfor %}
-
-            {% for question in MCQLIST %}
-                {{ question[0] }}
-                {% for choice in question[1] %}
-                    <!--Choice Field Goes Here-->{{ choice }}
-                {% endfor %}
-            {% endfor %}
-            <input type="submit">
-        </form>
-    </div>
-</body>
-</html>
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>Let's Find Out Your Current Sustainability!</title>
+            </head>
+            
+            <body>
+                <div>
+                    <form name="quiz" method="POST">
+                        {% csrf_token %}
+            
+                        {% for question in QUIZLIST %}
+                            {{ question }}
+                            <!--Input Field Goes Here-->
+                        {% endfor %}
+            
+                        {% for question in MCQLIST %}
+                            {{ question[0] }}
+                            {% for choice in question[1] %}
+                                <!--Choice Field Goes Here-->{{ choice }}
+                            {% endfor %}
+                        {% endfor %}
+                        <input type="submit">
+                    </form>
+                </div>
+            </body>
+            </html>
+            
