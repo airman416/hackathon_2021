@@ -14,7 +14,6 @@
                 recycled trash                                      nRecycle
 '''
 
-
 QUIZLIST = [
     "How many bedroom(s) and living room(s) do you have at home?",
     "How many hour(s) per day do you have the AC on?",

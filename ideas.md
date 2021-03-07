@@ -1,4 +1,4 @@
-**Brainstorming:**
+# Brainstorming:
 
 Issues caused by COVID:
     Hospitalization
@@ -22,7 +22,7 @@ Values:
     4. Others
 
 > Footprint = (Annaual_Energy_Usage_in_KWH * Energy_Factor) + (Amount_of_Food * Food_Factor) + (Amount_of_Transport * Transport_Factor)
-
+> 
 > Energy_Factor = Tonnes of CO2 per KWH of energy (Use online statistics on what % of energy comes from where to calculate this coefficient)
 > Food_Factor = Tonnes of CO2 per kg of food (different for each food, collect data on what % of food is meat, vegetables, etc)
 > Transport_Factor = Tonnes of CO2 per km of transport (calculate based on what % of transport is done on what) 
@@ -44,7 +44,12 @@ Total Factor = 0.465kg/kWH = 0.000465ton/kWH
 0.22kg/km Medium car
 0.27kg/km Large car
 0.06kg/km Train
-0.15kg/km Plane         
+0.15kg/km Plane         3.6 km 
+
+# Food Factor
+*Factor*        *Food*        *Cost*
+15.311kgCO2/kg  Meat (avg)    1270yen/kg (avg) 0.000787 kg/yen 0.01205kgCo2/yen
+5.818kgCO2/kg   Other (avg)   975yen/kg (avg)  0.001025 kg/yen 0.00596kgCO2/yen
 
 
 
@@ -52,34 +57,37 @@ Total Factor = 0.465kg/kWH = 0.000465ton/kWH
 
 
 Questions: 
-    Location of User (Winter/Summer)
-    Values of: 
-                *Value*                                             *Key in quiz Dict*
-                rooms (bedroom and living room)                     nRoom
-                daily hours with AC turned on                       nACHour
-                family members living with you                      nPeople
-                hours on PC                                         nPC
-                furniture (washing machines,refridgerators)         nLarge
-                number of time traveled by airplane per year        nAirPlane
-                hours per week of driving                           nDriving
-                hours per week of public transportation             nPublic
-                set ac temperature                                  nACTemp
-                rough num. of windows                               nWINDOWS
-                food waste                                          pFood
-                recycled trash                                      pRecycle
+```
+*Value*                                             *Key in quiz Dict*
+rooms (bedroom and living room)                     nRoom
+daily hours with AC turned on                       nACHour
+family members living with you                      nPeople
+hours on PC                                         nPC
+furniture (washing machines,refridgerators)         nLarge
+number of time traveled by airplane per year        nAirPlane
+hours per week of driving                           nDriving
+hours per week of public transportation             nPublic
+set ac temperature                                  nACTemp
+rough num. of windows                               nWINDOWS
+food waste                                          pFood
+recycled trash                                      pRecycle
+```
                 
                 
 Points of improvements:
 
+Make different measurements other than measuring carbon footrprint and overall sustainability 
+Make a percentage measurement on how a person is doing from the answerd questions
 
 
 Project Description:
-    Due to Covid-19, the topic of sustianbility has been badly neglected and so our [name of app] will solve the lack of public knowledge on sustainablity by providing a metric to individual users on their personal sustainblity as a percentage.
+    Due to Covid-19, the topic of sustianbility has been badly neglected and so our [name of app] will solve the lack of public knowledge on sustainablity by providing a metric to individual users on their impacts of their actions.
 
 
 
 # Website Outline
 
+```
 If file doesnt exist: 
     First time login -> Short quiz, create CFCalculator object and save object in file
     Go to main page
@@ -95,6 +103,7 @@ Else:
     User changes quiz value:
         Update CF
         Update graph tracking the CF
+```
 
 Result of questionnaire -> Amount of carbon footprint/other data
                         -> Actionable ways to reduce carbon footprint (eg. stop using cars and use public transport)
