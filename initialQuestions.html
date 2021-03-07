@@ -1,0 +1,44 @@
+<!--     Values of: 
+                *Value*                                             *Key in quiz Dict*
+                rooms (bedroom and living room)                     nRoom
+                daily hours with AC turned on                       nACHour
+                family members living with you                      nPeople
+                hours on PC                                         nPC
+                furniture (washing machines,refridgerators)
+                number of time traveled by airplane per year
+                hours per week of driving
+                hours per week of public transportation
+                set ac temperature
+                rough num. of windows
+                vehicles
+                bags of trash
+                recycled trash
+            -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Let's Find Out Your Current Sustainability!</title>
+</head>
+
+<body>
+    <div>
+        <form name="quiz" method="POST">
+            {% csrf_token %}
+
+            {% for question in QUIZLIST %}
+                {{ question }}
+                <!--Input Field Goes Here-->
+            {% endfor %}
+
+            {% for question in MCQLIST %}
+                {{ question[0] }}
+                {% for choice in question[1] %}
+                    <!--Choice Field Goes Here-->{{ choice }}
+                {% endfor %}
+            {% endfor %}
+            <input type="submit">
+        </form>
+    </div>
+</body>
+</html>
