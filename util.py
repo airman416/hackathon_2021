@@ -77,7 +77,7 @@ def calcCF(quiz):
     footprint = dict()
     
     # Calculate Carbon Footprint of AC, Lighting, PC, and other appliances
-    dailyEnergy = (0.8 * quiz["nRoom"] * quiz["nACHour"]) + (0.72 * quiz["nRoom"]) + (0.3 * quiz["hPC"]) + (4 * quiz["nLarge"])
+    dailyEnergy = (1.1 * quiz["nRoom"] * quiz["nACHour"]) + (0.72 * quiz["nRoom"]) + (0.3 * quiz["hPC"]) + (6 * quiz["nLarge"])
     footprint["Energy"] = 0.000465 * dailyEnergy
     
     # Calculate Carbon Footprint of eating Meat and Non-meat
@@ -103,13 +103,13 @@ quiz = dict()
 mcquiz = dict()
 
 quiz["nRoom"] = 4
-quiz["nACHour"] = 5
-quiz["hPC"] = 24
+quiz["nACHour"] = 12
+quiz["hPC"] = 5
 quiz["nLarge"] = 5
 
 quiz["hCar"] = 0
-quiz["hPublic"] = 10
-quiz["nPlane"] = 3
+quiz["hPublic"] = 5
+quiz["nPlane"] = 1
 
 mcquiz["carSize"] = "medium"
 mcquiz["pMeat"] = "0~20%"
