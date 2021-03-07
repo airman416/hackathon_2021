@@ -44,7 +44,7 @@ Total Factor = 0.465kg/kWH = 0.000465ton/kWH
 0.22kg/km Medium car
 0.27kg/km Large car
 0.06kg/km Train
-0.15kg/km Plane      
+0.15kg/km Plane         3.6 km 
 
 # Food Factor
 *Factor*        *Food*        *Cost*
@@ -76,6 +76,8 @@ recycled trash                                      pRecycle
                 
 Points of improvements:
 
+Make different measurements other than measuring carbon footrprint and overall sustainability 
+Make a percentage measurement on how a person is doing from the answerd questions
 
 
 Project Description:
