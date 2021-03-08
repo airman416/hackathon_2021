@@ -1,40 +1,167 @@
-body{
-    height: 100%;
+.title{
+  color:white;
+  margin-left: 50px;
+}
+
+
+.tabs {
+  display: flex;
+  flex-wrap:wrap;
+  height: 500px;
+  width: 1100;
+  positition:fixed;
+  margin-left: 50px;
+
+}
+
+.tabs label {
+  order: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 0.1rem 0.2rem;
+  margin-right: 0.2rem;
+  cursor: pointer;
+  background-color: grey;
+  font-weight: bold;
+  transition: background ease 0.3s;
+}
+
+.tabs .tab {
+  order: 9;
+  flex-grow: 1;
+  width: 100%;
+  height: 100%;
+  display: none;
+  padding: 1rem;
+  background: #fff;
+  padding: 1%;
+  box-shadow: -10px 10px 0px 0px black;
+}
+
+.tabs input[type="radio"] {
+  display: none;
+}
+
+.tabs input[type="radio"]:checked + label {
+  background: #fff;
+}
+
+.tabs input[type="radio"]:checked + label + .tab {
+  display: block;
+}
+
+@media (max-width: 400px) {
+  .tabs .tab,
+  .tabs label {
+   order: initial;
+  }
+
+
+  .tabs label {
     width: 100%;
-    background-color: gray;
- 
+    margin-left: 5vh;
+  }
 }
 
-.box{
-    /* left top */
-    width: 1000;
-    height: 700px;
-    position: relative;
-    top: 50px;
-    background: red;
+.graph{
+  color: black;
+  width: 600px;
+  height: 200px;
+  background: #fff;
+  position: fixed;
+  bottom: 50px;
+  left: 1250px;
 
-    /* left top 
-    width: 1000px;
-    height: 700px;
-    position: relative;
-    top: 50px;
-    background: red;
 
-    /* left top 
-    width: 1000px;
-    height: 700px;
-    position: relative;
-    top: 50px;
-    background: red;
-
-    /* left top 
-    width: 1000px;
-    height: 700px;
-    position: relative;
-    top: 50px;
-    background: red;
-    */
 }
+
+.clock{
+
+  color: black;
+  width: 600px;
+  height: 200px;
+  background: #fff;
+  position:fixed;
+  left: 1250px;
+  bottom: 610px;
+
+
+}
+
+.thingsYouCanDo{
+  position:relative;
+  color: black;
+  width: 600px;
+  height: 300px;
+  background: #fff;
+  position:fixed;
+  left: 1250px;
+  bottom: 290px;
+
+
+}
+.carbonFootprint{
+  position:relative;
+  color: black;
+  width: 1100px;
+  background: #fff;
+  height: 200px;
+  position: fixed;
+  left: 100px;
+  bottom: 50px;
+}
+
+
+@media (min-width: 1500px){
+  .graph{
+    display: block;
+
+  }
+  .carbonFootprint{
+    display: block;
+
+  }
+  .thingsYouCanDo{
+    display: block;
+
+  }
+  .clock{
+    display: block;
+
+  }
+  .graph{
+    display: block;
+
+  }
+
+
+}
+
+body {
+  position:relative;
+  margin-top:50px;
+  width:1820px;
+  height:900px;
+  background: rgb(133,94,66);
+  min-height: 900px;
+  box-sizing: border-box;
+/*padding-top: 10vh;
+  padding-left:10vh:
+*/
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", "sans-serif";
+  font-weight: 300;
+  line-height: 1.5;
+  max-width: 1920px;
+  margin-left:50px;
+  margin-right:50px;
+  font-size: 100%;
+  display: flex;
+  outline:50px solid white;
+  overflow-y: auto;
+}
+
 
 .product_image {
     width: 25%;
