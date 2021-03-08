@@ -35,3 +35,8 @@ body{
     background: red;
     */
 }
+
+.product_image {
+    width: 25%;
+    height: 100px;
+}
