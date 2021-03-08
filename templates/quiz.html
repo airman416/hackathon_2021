@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>App Name</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <div class="back"></div>
+</head>
+
+<body>
+    {% for c in cf %}
+        Energy: {{ c.energy }}<br>
+        Food: {{ c.food }}<br>
+        Transport: {{ c.transport }}<br>
+        Yearly: {{ c.yearly }}<br>
+        <br><br><br>
+    {% endfor %}
+
+
+    {% from '_reusableForm.html' import render_field %}
+    <form action='/quiz' method="POST">
+        {{ form.csrf_token }}
+        {{ render_field(form.nRoom) }}
+        {{ render_field(form.nAC) }}
+        {{ render_field(form.nPC) }}
+        {{ render_field(form.nLarge) }}
+        {{ render_field(form.pMeat) }}
+        {{ render_field(form.foodCost) }}
+        {{ render_field(form.carSize) }}
+        {{ render_field(form.nCar) }}
+        {{ render_field(form.nPublic) }}
+        {{ render_field(form.nPlane) }}
+        <input type="submit" value="Calculate Footprint">
+    </form>
+</body>
+</html>
