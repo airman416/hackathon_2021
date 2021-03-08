@@ -6,6 +6,7 @@ from wtforms.validators import InputRequired
 from datetime import datetime
 from util import *
 
+from ecom import retrieve_product_name
 
 
 """------------------------------------Initializing App and Database------------------------------------"""
@@ -98,6 +99,10 @@ def quiz_page():
     return render_template('quiz.html', form=form, cf=cf)
 
 
+@app.route('/products', methods=['GET'])
+def products():
+    product_data = retrieve_product_name()
+    return render_template('products.html', product_data=product_data)
 
 
 
