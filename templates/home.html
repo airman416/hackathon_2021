@@ -1,73 +1,72 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>App Name</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <div class="back"></div>
+  <title>App Name</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  <!--Bootstrap-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+  
 </head>
 
 <body>
-    <form action='/' method="POST">
-        <input type="text" name="content" id="content">
-        <input type="submit" value="Add Task">
-    </form>
-    <div class="box"></div>
-    <div class=title>
-    <h1>Title of the page</h1>
-  </div>
+  <div class="pad">
+    <!--Title-->
+    <h1>Placeholder Product name</h1>
+    
 
-  <div class="carbonFootprint">
-    <h1>Your Carbon Footprint<h1>
-
-  </div>
-
-  <div class="graph">
-    <h1>graph of co2<h1>
-
-  </div>
-
-  <div class="clock">
-    <h1>dooms day clock<h1>
-
-  </div>
-
-  <div class="thingsYouCanDo">
-    <h1>things you can do<h1>
-
-  </div>
-
-  <div class="tabs">
-
-    <input type="radio" name="tabs" id="tabone" checked="checked">
-    <label for="tabone">Overview</label>
-    <div class="tab">
-      <h1>This is the overview</h1>
-      <p>Content</p>
+    <!--Tabs-->
+    <div class="tabs">
+      <!--Tab Buttons-->
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <button class="nav-link active" id="nav-overview-tab" data-bs-toggle="tab" data-bs-target="#nav-overview" type="button" role="tab" aria-controls="nav-overview" aria-selected="true">Overview</button>
+          <button class="nav-link" id="nav-energy-tab" data-bs-toggle="tab" data-bs-target="#nav-energy" type="button" role="tab" aria-controls="nav-energy">Energy</button>
+          <button class="nav-link" id="nav-food-tab" data-bs-toggle="tab" data-bs-target="#nav-food" type="button" role="tab" aria-controls="nav-food">Food</button>
+          <button class="nav-link" id="nav-transport-tab" data-bs-toggle="tab" data-bs-target="#nav-transport" type="button" role="tab" aria-controls="nav-transport">Transport</button>
+        </div>
+      </nav>
+      <!--Tab Content-->
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-overview" role="tabpanel" aria-labelledby="nav-overview-tab">Overview Content</div>
+        <div class="tab-pane fade" id="nav-energy" role="tabpanel" aria-labelledby="nav-energy-tab">Energy Content</div>
+        <div class="tab-pane fade" id="nav-food" role="tabpanel" aria-labelledby="nav-food-tab">Food Content</div>
+        <div class="tab-pane fade" id="nav-transport" role="tabpanel" aria-labelledby="nav-transport-tab">Transport Content</div>
+      </div>
     </div>
-
-    <input type="radio" name="tabs" id="tabtwo">
-    <label for="tabtwo">Food</label>
-    <div class="tab">
-      <h1>Food Sustainability</h1>
-      <p>Content</p>
+    
+    
+    <!--Clock and Suggestion-->
+    <div class="clock">
+      <!--Clock-->
+      Clock goes here
     </div>
-
-    <input type="radio" name="tabs" id="tabthree">
-    <label for="tabthree">Transport</label>
-    <div class="tab">
-      <h1>Transport Sustainability</h1>
-      <p>Content</p>
+    
+    <div class="suggestion">
+      <!--Suggestion-->
+      Recommendation goes here
     </div>
-
-    <input type="radio" name="tabs" id="tabfour">
-    <label for="tabfour">Energy</label>
-    <div class="tab">
-      <h1>Energy Sustainability</h1>
-      <p>Content</p>
+    
+    
+    <!--Footprint-->
+    <div class="footprint">
+      <!--Footprint-->
+      <p class="label">Your Carbon Footprint<br></p>
+      <img class="fimg" src="{{ footprint_image }}" alt="Footprint Image">
+      <p class="value">{{'%0.2f'| format(recent.daily|float)}} kg per day</value>
+      <p class="mini">{{ relative }}</p>
     </div>
-
+    
+    
+    <!--Graph-->
+    <div class="graph">
+      <!--Graph-->
+      <img class="plt" src="{{ plot_string }}">
+    </div>
+    
+    
   </div>
 </body>
 </html>

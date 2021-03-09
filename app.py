@@ -4,8 +4,9 @@ from flask_wtf import FlaskForm
 from wtforms import IntegerField, SelectField, SubmitField
 from wtforms.validators import InputRequired
 from datetime import datetime
-from util import *
+import os
 
+from util import *
 from ecom import retrieve_product_name
 
 
@@ -13,6 +14,7 @@ from ecom import retrieve_product_name
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 app.config['SECRET_KEY'] = '256808a4404917c4e708d093936b2ccb'
+app.config['UPLOAD_FOLDER'] = os.path.join('static', 'images')
 db = SQLAlchemy(app)
 
 
@@ -34,6 +36,7 @@ class Footprint(db.Model):
     daily = db.Column(db.Float)         # total daily footprint in kg
     yearly = db.Column(db.Float)        # total yearly footprint in tonnes
     date_added = db.Column(db.DateTime, default=datetime.utcnow)
+    form = db.Column(db.PickleType())   # form data for recommending
     
     def __repr__(self):
         return '<Footprint %r>' % self.id
@@ -72,12 +75,15 @@ class QuizForm(FlaskForm):
 
 
 """----------------------------------------Webpage and Rendering----------------------------------------"""
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 def home_page():
-    if request.method == 'POST':
-        pass
-    else:
-        return render_template('home.html')
+    recent = Footprint.query.order_by(Footprint.date_added.desc()).first()              # most recent carbon footprint
+    footprint_image = os.path.join(app.config['UPLOAD_FOLDER'], 'footprint_image.png')  # footprint image
+    relative = compareCF(recent.yearly)                                                 # comparison to average (x% above/below average)
+    
+    cfs = Footprint.query.order_by(Footprint.date_added.desc()).all()                   # all carbon footprints
+    plot_string = plot(cfs)                                                             # get image of plot
+    return render_template('home.html', recent=recent, footprint_image=footprint_image, relative=relative, plot_string=plot_string)
 
 
 
@@ -90,7 +96,7 @@ def quiz_page():
         footprint = calcCF(result)
         daily = sum(footprint.values())
         yearly = daily * 0.365
-        cf = Footprint(energy=footprint["Energy"], food=footprint["Food"], transport=footprint["Transport"], daily=daily, yearly=yearly)
+        cf = Footprint(energy=footprint["Energy"], food=footprint["Food"], transport=footprint["Transport"], daily=daily, yearly=yearly, form=result)
         db.session.add(cf)
         db.session.commit()
         return redirect(url_for('quiz_page'))
