@@ -1,73 +1,111 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>App Name</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <div class="back"></div>
+  <title>App Name</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  <!--Bootstrap-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+  
 </head>
 
 <body>
-    <form action='/' method="POST">
-        <input type="text" name="content" id="content">
-        <input type="submit" value="Add Task">
-    </form>
-    <div class="box"></div>
-    <div class=title>
-    <h1>Title of the page</h1>
-  </div>
+  <div class="pad">
+    <!--Title-->
+    <h1>Placeholder Product name</h1>
+    
 
-  <div class="carbonFootprint">
-    <h1>Your Carbon Footprint<h1>
-
-  </div>
-
-  <div class="graph">
-    <h1>graph of co2<h1>
-
-  </div>
-
-  <div class="clock">
-    <h1>dooms day clock<h1>
-
-  </div>
-
-  <div class="thingsYouCanDo">
-    <h1>things you can do<h1>
-
-  </div>
-
-  <div class="tabs">
-
-    <input type="radio" name="tabs" id="tabone" checked="checked">
-    <label for="tabone">Overview</label>
-    <div class="tab">
-      <h1>This is the overview</h1>
-      <p>Content</p>
+    <!--Tabs-->
+    <div class="tabs">
+      <!--Tab Buttons-->
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <button class="nav-link active" id="nav-overview-tab" data-bs-toggle="tab" data-bs-target="#nav-overview" type="button" role="tab" aria-controls="nav-overview" aria-selected="true">Overview</button>
+          <button class="nav-link" id="nav-energy-tab" data-bs-toggle="tab" data-bs-target="#nav-energy" type="button" role="tab" aria-controls="nav-energy">Energy</button>
+          <button class="nav-link" id="nav-food-tab" data-bs-toggle="tab" data-bs-target="#nav-food" type="button" role="tab" aria-controls="nav-food">Food</button>
+          <button class="nav-link" id="nav-transport-tab" data-bs-toggle="tab" data-bs-target="#nav-transport" type="button" role="tab" aria-controls="nav-transport">Transport</button>
+        </div>
+      </nav>
+      <!--Tab Content-->
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-overview" role="tabpanel" aria-labelledby="nav-overview-tab">Overview Content</div>
+        <div class="tab-pane fade" id="nav-energy" role="tabpanel" aria-labelledby="nav-energy-tab">Energy Content</div>
+        <div class="tab-pane fade" id="nav-food" role="tabpanel" aria-labelledby="nav-food-tab">Food Content</div>
+        <div class="tab-pane fade" id="nav-transport" role="tabpanel" aria-labelledby="nav-transport-tab">Transport Content</div>
+      </div>
     </div>
-
-    <input type="radio" name="tabs" id="tabtwo">
-    <label for="tabtwo">Food</label>
-    <div class="tab">
-      <h1>Food Sustainability</h1>
-      <p>Content</p>
+    
+    
+    <!--Clock and Suggestion-->
+    <div class="clock">
+      <!--Clock-->
+      Clock goes here
     </div>
-
-    <input type="radio" name="tabs" id="tabthree">
-    <label for="tabthree">Transport</label>
-    <div class="tab">
-      <h1>Transport Sustainability</h1>
-      <p>Content</p>
+    
+    <div class="suggestion">
+      <!--Suggestion-->
+      Recommendation goes here
     </div>
-
-    <input type="radio" name="tabs" id="tabfour">
-    <label for="tabfour">Energy</label>
-    <div class="tab">
-      <h1>Energy Sustainability</h1>
-      <p>Content</p>
+    
+    
+    <!--Footprint-->
+    <div class="footprint">
+      <!--Footprint-->
+      Footprint goes here
     </div>
+    
+    
+    <!--Graph-->
+    <div class="graph">
+      <!--Graph-->
 
+      <style>
+        
+      </style>
+      
+      <div id="fig_el542971402792252110242406233967"></div>
+      <script>
+        function mpld3_load_lib(url, callback){
+          var s = document.createElement('script');
+          s.src = url;
+          s.async = true;
+          s.onreadystatechange = s.onload = callback;
+          s.onerror = function(){console.warn("failed to load library " + url);};
+          document.getElementsByTagName("head")[0].appendChild(s);
+        }
+        
+        if(typeof(mpld3) !== "undefined" && mpld3._mpld3IsLoaded){
+          // already loaded: just create the figure
+          !function(mpld3){
+            
+            mpld3.draw_figure("fig_el542971402792252110242406233967", {"width": 640.0, "height": 480.0, "axes": [{"bbox": [0.125, 0.10999999999999999, 0.775, 0.77], "xlim": [0.6, 9.4], "ylim": [0.6, 9.4], "xdomain": [0.6, 9.4], "ydomain": [0.6, 9.4], "xscale": "linear", "yscale": "linear", "axes": [{"position": "bottom", "nticks": 11, "tickvalues": null, "tickformat_formatter": "", "tickformat": null, "scale": "linear", "fontsize": 10.0, "grid": {"gridOn": false}, "visible": true}, {"position": "left", "nticks": 11, "tickvalues": null, "tickformat_formatter": "", "tickformat": null, "scale": "linear", "fontsize": 10.0, "grid": {"gridOn": false}, "visible": true}], "axesbg": "#FFFFFF", "axesbgalpha": null, "zoomable": true, "id": "el54297140279243975248", "lines": [{"data": "data01", "xindex": 0, "yindex": 1, "coordinates": "data", "id": "el54297140279245336464", "color": "#1F77B4", "linewidth": 1.5, "dasharray": "none", "alpha": 1, "zorder": 2, "drawstyle": "default"}], "paths": [], "markers": [], "texts": [], "collections": [], "images": [], "sharex": [], "sharey": []}], "data": {"data01": [[1.0, 1.0], [2.0, 2.0], [3.0, 3.0], [4.0, 4.0], [5.0, 5.0], [6.0, 6.0], [7.0, 7.0], [8.0, 8.0], [9.0, 9.0]]}, "id": "el54297140279225211024", "plugins": [{"type": "reset"}, {"type": "zoom", "button": true, "enabled": false}, {"type": "boxzoom", "button": true, "enabled": false}]});
+          }(mpld3);
+        }else if(typeof define === "function" && define.amd){
+          // require.js is available: use it to load d3/mpld3
+          require.config({paths: {d3: "https://d3js.org/d3.v5"}});
+          require(["d3"], function(d3){
+            window.d3 = d3;
+            mpld3_load_lib("https://mpld3.github.io/js/mpld3.v0.5.2.js", function(){
+              
+              mpld3.draw_figure("fig_el542971402792252110242406233967", {"width": 640.0, "height": 480.0, "axes": [{"bbox": [0.125, 0.10999999999999999, 0.775, 0.77], "xlim": [0.6, 9.4], "ylim": [0.6, 9.4], "xdomain": [0.6, 9.4], "ydomain": [0.6, 9.4], "xscale": "linear", "yscale": "linear", "axes": [{"position": "bottom", "nticks": 11, "tickvalues": null, "tickformat_formatter": "", "tickformat": null, "scale": "linear", "fontsize": 10.0, "grid": {"gridOn": false}, "visible": true}, {"position": "left", "nticks": 11, "tickvalues": null, "tickformat_formatter": "", "tickformat": null, "scale": "linear", "fontsize": 10.0, "grid": {"gridOn": false}, "visible": true}], "axesbg": "#FFFFFF", "axesbgalpha": null, "zoomable": true, "id": "el54297140279243975248", "lines": [{"data": "data01", "xindex": 0, "yindex": 1, "coordinates": "data", "id": "el54297140279245336464", "color": "#1F77B4", "linewidth": 1.5, "dasharray": "none", "alpha": 1, "zorder": 2, "drawstyle": "default"}], "paths": [], "markers": [], "texts": [], "collections": [], "images": [], "sharex": [], "sharey": []}], "data": {"data01": [[1.0, 1.0], [2.0, 2.0], [3.0, 3.0], [4.0, 4.0], [5.0, 5.0], [6.0, 6.0], [7.0, 7.0], [8.0, 8.0], [9.0, 9.0]]}, "id": "el54297140279225211024", "plugins": [{"type": "reset"}, {"type": "zoom", "button": true, "enabled": false}, {"type": "boxzoom", "button": true, "enabled": false}]});
+            });
+          });
+        }else{
+          // require.js not available: dynamically load d3 & mpld3
+          mpld3_load_lib("https://d3js.org/d3.v5.js", function(){
+            mpld3_load_lib("https://mpld3.github.io/js/mpld3.v0.5.2.js", function(){
+              
+              mpld3.draw_figure("fig_el542971402792252110242406233967", {"width": 640.0, "height": 480.0, "axes": [{"bbox": [0.125, 0.10999999999999999, 0.775, 0.77], "xlim": [0.6, 9.4], "ylim": [0.6, 9.4], "xdomain": [0.6, 9.4], "ydomain": [0.6, 9.4], "xscale": "linear", "yscale": "linear", "axes": [{"position": "bottom", "nticks": 11, "tickvalues": null, "tickformat_formatter": "", "tickformat": null, "scale": "linear", "fontsize": 10.0, "grid": {"gridOn": false}, "visible": true}, {"position": "left", "nticks": 11, "tickvalues": null, "tickformat_formatter": "", "tickformat": null, "scale": "linear", "fontsize": 10.0, "grid": {"gridOn": false}, "visible": true}], "axesbg": "#FFFFFF", "axesbgalpha": null, "zoomable": true, "id": "el54297140279243975248", "lines": [{"data": "data01", "xindex": 0, "yindex": 1, "coordinates": "data", "id": "el54297140279245336464", "color": "#1F77B4", "linewidth": 1.5, "dasharray": "none", "alpha": 1, "zorder": 2, "drawstyle": "default"}], "paths": [], "markers": [], "texts": [], "collections": [], "images": [], "sharex": [], "sharey": []}], "data": {"data01": [[1.0, 1.0], [2.0, 2.0], [3.0, 3.0], [4.0, 4.0], [5.0, 5.0], [6.0, 6.0], [7.0, 7.0], [8.0, 8.0], [9.0, 9.0]]}, "id": "el54297140279225211024", "plugins": [{"type": "reset"}, {"type": "zoom", "button": true, "enabled": false}, {"type": "boxzoom", "button": true, "enabled": false}]});
+            })
+          });
+        }
+      </script>
+
+    </div>
+    
+    
   </div>
 </body>
 </html>

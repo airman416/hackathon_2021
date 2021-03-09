@@ -8,14 +8,13 @@ def retrieve_product_name():
     name =  [i.text for i in soup.find_all('div', class_='thar__title1', text=True)]
     print(name)
     image = [i.attrs['src'] for i in soup.find_all('img', class_='thar__img') if i.attrs['src'] != 
-             'https://cdn.trendhunterstatic.com/icons/tha/lazyplaceholder.jpeg']
+            'https://cdn.trendhunterstatic.com/icons/tha/lazyplaceholder.jpeg']
 
     product_data = []
     
     for i, j in zip(name, image):
         product_data.append({'name': i,
-                             'image': j})
-        
+                            'image': j})
     return product_data
 
 retrieve_product_name()

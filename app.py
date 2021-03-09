@@ -14,6 +14,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 app.config['SECRET_KEY'] = '256808a4404917c4e708d093936b2ccb'
 db = SQLAlchemy(app)
+db.create_all()
 
 
 
@@ -34,6 +35,7 @@ class Footprint(db.Model):
     daily = db.Column(db.Float)         # total daily footprint in kg
     yearly = db.Column(db.Float)        # total yearly footprint in tonnes
     date_added = db.Column(db.DateTime, default=datetime.utcnow)
+    form = db.Column(db.PickleType())   # form data for recommending
     
     def __repr__(self):
         return '<Footprint %r>' % self.id
@@ -90,7 +92,7 @@ def quiz_page():
         footprint = calcCF(result)
         daily = sum(footprint.values())
         yearly = daily * 0.365
-        cf = Footprint(energy=footprint["Energy"], food=footprint["Food"], transport=footprint["Transport"], daily=daily, yearly=yearly)
+        cf = Footprint(energy=footprint["Energy"], food=footprint["Food"], transport=footprint["Transport"], daily=daily, yearly=yearly, form=result)
         db.session.add(cf)
         db.session.commit()
         return redirect(url_for('quiz_page'))

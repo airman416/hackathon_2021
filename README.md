@@ -1,6 +1,6 @@
 # hackathon_2021
 
-# Fun Group name (can be different from Discord group name):
+# Fun Group name (can be different from Discord group name): 2b | !2b
 
 ​
 # Group members (first name and surname for each of your group members):
@@ -16,8 +16,9 @@ This project allows for calculation, tracking, and education of individual's sus
 ​
 # Technologies/Software/Programming Languages used:
 Python
+    Flask
 HTML 
-Flask
+CSS
 
 # Detailed instructions for how to open or run your project:
 1. First, download all the files from the dropbox
