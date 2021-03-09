@@ -36,3 +36,18 @@ def calcCF(result):
     footprint["Transport"] = (2.857 * result["carSize"] * result["nCar"]) + (0.257 * result["nPublic"]) + (0.395 * result["nPlane"])
     
     return footprint
+
+
+def compareCF(footprint):
+    '''
+    Compares the footprint relative to Japan's average carbon footprint per person per year
+    Average: 9.09 tonnes in 2019
+    
+    E.g. If footprint = 8 tonnes
+    "13.6% below average"
+    
+    If footprint = 12 tonnes
+    "32.0% above average"
+    '''
+    percentDiff = round((100 * (footprint - 9.09)/9.09), 1)     # percentage change to one decimal place
+    return f"{percentDiff}% above average" if percentDiff >= 0 else f"{-percentDiff}% below average"

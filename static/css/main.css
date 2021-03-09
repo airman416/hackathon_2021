@@ -17,7 +17,7 @@ h1 {
 /*----------------------------------------Main Container----------------------------------------*/
 .pad {
   width: 100%;
-  height: 1000px;
+  height: 65vw;
   padding: 2%;
 
   background: rgb(52, 58, 64);
@@ -28,7 +28,7 @@ h1 {
 /*----------------------------------------Tabs, Top Left----------------------------------------*/
 .tabs {
   width: 60%;
-  height: 440px;
+  height: 28.6vw;
   margin-right: 2%;
   float: left;
   display: table-column;
@@ -37,7 +37,7 @@ h1 {
 /*Tab Button*/
 .tabs .nav-tabs .nav-link {
   width: 20%;
-  height: 40px;
+  height: 2.6vw;
   width: 20%;
   padding: 0.5% 1.5% 0.5% 1.5%;
 
@@ -49,7 +49,7 @@ h1 {
 
 /*Tab Content, Revealed Onclick*/
 .tab-content {
-  height: 480px;
+  height: 31.2vw;
   padding: 2%;
 
   font-size: 1vw;
@@ -63,8 +63,8 @@ h1 {
 /*---------------------------------Clock and Suggestion, Top Right---------------------------------*/
 .clock {
   width: 38%;
-  height: 100px;
-  margin-top: 40px;
+  height: 6.5vw;
+  margin-top: 2.6vw;
   float: right;
   display: table-column;
 
@@ -74,8 +74,8 @@ h1 {
 
 .suggestion {
   width: 38%;
-  height: 340px;
-  margin-top: 40px;
+  height: 22.1vw;
+  margin-top: 2.6vw;
   float: right;
   display: table-column;
 
@@ -88,13 +88,57 @@ h1 {
 /*-------------------------------------Footprint, Bottom Left-------------------------------------*/
 .footprint {
   width: 34%;
-  height: 300px;
-  margin: 120px 2% 0px 0px;
+  height: 19.5vw;
+  margin: 7.8vw 2% 0vw 0vw;
   float: left;
   display: table-column;
+  position: relative;
 
   background: #f5f5f5;
   border-radius: 1vw;
+}
+
+/*Footprint Text*/
+.footprint p.label {
+  padding-top: 0.4vw;
+
+  color: rgb(110, 170, 40);
+  font-size: 2vw;
+  text-align: center;
+  font-weight: 800;
+}
+
+/*Footprint display*/
+.footprint p.value {
+  width: 60%;
+  padding-top: 1.2vw;
+  float: right;
+
+  color: rgb(52, 58, 64);
+  font-size: 4vw;
+  font-weight: 800;
+  line-height: 0.9;
+}
+
+/*Footprint relative to average*/
+.footprint p.mini {
+  width: 60%;
+  padding-top: 0.5vw;
+  float: right;
+
+  color: rgb(52, 58, 64);
+  font-size: 1.2vw;
+  font-weight: 200;
+}
+
+/*Footprint Image*/
+.fimg {
+  width: 40%;
+  margin-right: 2%;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 
 
@@ -102,8 +146,8 @@ h1 {
 /*--------------------------------------Graph, Bottom Right--------------------------------------*/
 .graph {
   width: 64%;
-  height: 300px;
-  margin: 40px 0px 0px 0px;
+  height: 19.5vw;
+  margin-top: 2.6vw;
   float: right;
   display: table-column;
 

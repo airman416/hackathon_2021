@@ -53,17 +53,16 @@
     <!--Footprint-->
     <div class="footprint">
       <!--Footprint-->
-      Footprint goes here
+      <p class="label">Your Carbon Footprint<br></p>
+      <img class="fimg" src="{{ footprint_image }}" alt="Footprint Image">
+      <p class="value">{{'%0.2f'| format(recent.daily|float)}} kg per day</value>
+      <p class="mini">{{ relative }}</p>
     </div>
     
     
     <!--Graph-->
     <div class="graph">
       <!--Graph-->
-
-      <style>
-        
-      </style>
       
       <div id="fig_el542971402792252110242406233967"></div>
       <script>
