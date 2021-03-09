@@ -16,7 +16,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 app.config['SECRET_KEY'] = '256808a4404917c4e708d093936b2ccb'
 app.config['UPLOAD_FOLDER'] = os.path.join('static', 'images')
 db = SQLAlchemy(app)
-db.create_all()
 
 
 
@@ -81,7 +80,10 @@ def home_page():
     recent = Footprint.query.order_by(Footprint.date_added.desc()).first()              # most recent carbon footprint
     footprint_image = os.path.join(app.config['UPLOAD_FOLDER'], 'footprint_image.png')  # footprint image
     relative = compareCF(recent.yearly)                                                 # comparison to average (x% above/below average)
-    return render_template('home.html', recent=recent, footprint_image=footprint_image, relative=relative)
+    
+    cfs = Footprint.query.order_by(Footprint.date_added.desc()).all()                   # all carbon footprints
+    plot_string = plot(cfs)                                                             # get image of plot
+    return render_template('home.html', recent=recent, footprint_image=footprint_image, relative=relative, plot_string=plot_string)
 
 
 
