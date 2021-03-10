@@ -63,28 +63,20 @@ def compareCF(footprint):
 
 
 def recommend(cf):
+    '''
+    Recommends tips to reduce carbon footprint based on which values are represented the most
+    '''
     #{'nRoom': 5.0, 'nAC': 3.0, 'nPC': 8.0, 'nLarge': 4.0, 'pMeat': 0.5, 'foodCost': 750.0, 'carSize': 0.22, 'nCar': 5.0, 'nPublic': 4.0, 'nPlane': 0.0}
 
     
     form = cf.form
-    reco=[]
-    sug=""
-    sdg=""" <a href="https://sdgs.un.org/goals" target="_blank">Visit the UN SDGs Page!</a> """
+    reco = []
+    sug = ""
+    sdg = """<li><a href="https://sdgs.un.org/goals" target="_blank">Visit the UN SDGs Page!</a></li>"""
     urg=0 #sclae of 1~ to apply a level to decide which suggestion to show
 
-
-    # this is just used for testing the function and it's urgency sorting. 
-    #------------------------------------------
-
-
-    # template for link inb
-    # <a href="" target="_blank"> </a>
-
-    # form['nPlane']*2 + 2
-    #-----------------------------------------
     if urg <= (form['nAC']/3 +1):
         sug="""
-            <ul>
                 <li>Close curtains to prevent energy loss </li> 
                 <li>Create shade around your home</li>
                 <li>Use a fan instead of AC</li>
@@ -92,14 +84,12 @@ def recommend(cf):
                 <li>Upgrade your windows</li>
                 <li>Raise the target temperature when you are not home</li>
                 <a href="<a href="https://www.economist.com/leaders/2018/08/25/how-to-make-air-conditioning-more-sustainable" target="_blank"> Want to know more?</a>
-            </ul>
-                """
+            """
         urg=(form['nAC']/3 +1)
             
 
     if urg <= (form['nPC']/2):
         sug="""
-            <ul>
                 <li>Reduce monitor brightness</li>
                 <li>Set the computer to sleep when not used</li>
                 <li>Set the computer's mode to battery saving scheme</li>
@@ -107,14 +97,11 @@ def recommend(cf):
                 <li>Close softwares that you are not using</li>
                 <li>Underclock the computer components</li>
                 <a href="https://www.techradar.com/news/computing/pc/the-ultimate-guide-to-reducing-your-pc-s-power-consumption-661978/3" target="_blank">Want to know more? </a>
-
-            </ul>
-                """
+            """
         urg=(form['nPC']/2)
 
     if urg <= (form['nLarge']*2):
         sug="""
-            <ul>
                 <li>Clean your refrigerator</li>
                 <li>Reorganize your refrigerator</li>
                 <li>Run the washing machine in large quantities</li>
@@ -122,14 +109,12 @@ def recommend(cf):
                 <li>Opt for an energy certified <a href="https://www.energystar.gov/" target="_blank"> (ie ENERGY STAR) </a> electric furniture</li>
                 <li>Opt for a water and electric efficient furniture <a href="https://www.energystar.gov/products/most_efficient" target="_blank">(ie showerhead, dish washer, cloth washer)</a></li>
                 <a href="https://www.treehugger.com/how-to-go-green-in-the-kitchen-4858697" target="_blank">Want to know more?</a>
-            </ul>
-                """    
+            """    
         urg=(form['nLarge']*2)
 
 
     if urg <= (form['pMeat']*10 + 3):
         sug="""
-            <ul>
                 <li>Experiment with new grains, vegetables and <a href="https://www.allrecipes.com/recipes/87/everyday-cooking/vegetarian/" target="_blank">recipes</a></li>
                 <li>Bulk up meat dishes with beans, grains or vegetable</li>
                 <li>Try substituting your favourite foods for meat free versions</li>
@@ -137,15 +122,12 @@ def recommend(cf):
                 <li><a href="https://www.sustainweb.org/sustainablefood/meat_and_dairy_products_less_is_more/" target="_blank">Try going meat free for one day a week</a></li>
                 <li>Buy meat on the bone</li>
                 <a href="https://www.treehugger.com/strategies-reducing-meat-your-diet-4852990" target="_blank">Want to know more?</a>
-                
-            </ul>
-                """  
+            """  
         urg = (form['pMeat']*10 + 3)
 
 
     if urg <= (form['nPlane']*2 + 2):
         sug="""
-            <ul>
                 <li>Choose non-stop flights</li>
                 <li>Fly Economy or Coach</li>
                 <li>Try to avoid flying</li>
@@ -153,7 +135,6 @@ def recommend(cf):
                 <li>Use other means of transportation</li>
                 <li><a href="https://www.nytimes.com/2017/07/27/climate/airplane-pollution-global-warming.html" target="_blank">Learn the effects of flying </a></li>
                 <a href="https://www.pbs.org/newshour/science/these-7-simple-airplane-fixes-could-halve-carbon-emissions-at-little-to-no-cost" target="_blank"> Want to know more?</a>
-            </ul>
             """
         urg = (form['nPlane']*2 + 2)
 
@@ -161,7 +142,6 @@ def recommend(cf):
 
     if urg <= (form['nCar']/2):
         sug="""
-            <ul>
                 <li>Use a cleaning agent <a href="https://youtu.be/9RXY8TRMMzs" target="_blank">(Video)</a></li>
                 <li>Change the engine oil <a href="https://www.rac.co.uk/drive/advice/car-maintenance/how-to-check-your-oil/" target="_blank">(How?)</a></li>
                 <li>Change the air filter</li>
@@ -171,8 +151,7 @@ def recommend(cf):
                 <li>Reduce idle time</li>
                 <li>Refrain from driving</li>
                 <a href="https://www.epa.gov/transportation-air-pollution-and-climate-change/what-you-can-do-reduce-pollution-vehicles-and-engines" target="_blank">Want to know more? </a>
-            </ul>
-        """
+            """
         urg = ()
 
     reco=[sug, sdg]

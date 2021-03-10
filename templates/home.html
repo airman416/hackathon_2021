@@ -51,9 +51,11 @@
     
     <div class="suggestion">
       <!--Suggestion-->
+      <ul>
       {% for sol in solutions %}
-        <p>{{ sol|safe }}</p>
+        {{ sol|safe }}
       {% endfor %}
+      <ul>
     </div>
     
     
