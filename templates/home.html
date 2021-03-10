@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  <script src="{{ url_for('static', filename='javascript/clockscript.js') }}"></script>
   <!--Bootstrap-->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
@@ -30,7 +31,10 @@
       </nav>
       <!--Tab Content-->
       <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="nav-overview" role="tabpanel" aria-labelledby="nav-overview-tab">Overview Content</div>
+        <div class="tab-pane fade show active" id="nav-overview" role="tabpanel" aria-labelledby="nav-overview-tab">
+          <!--Overview Content-->
+          <img class="plt" src="{{ plot_overview }}">
+        </div>
         <div class="tab-pane fade" id="nav-energy" role="tabpanel" aria-labelledby="nav-energy-tab">Energy Content</div>
         <div class="tab-pane fade" id="nav-food" role="tabpanel" aria-labelledby="nav-food-tab">Food Content</div>
         <div class="tab-pane fade" id="nav-transport" role="tabpanel" aria-labelledby="nav-transport-tab">Transport Content</div>
@@ -41,29 +45,38 @@
     <!--Clock and Suggestion-->
     <div class="clock">
       <!--Clock-->
-      Clock goes here
+      <p class="label"><b>Deadline</b> We must achieve 0 emission in:</p>
+      <p class="value" id="clock"></p>
     </div>
     
     <div class="suggestion">
       <!--Suggestion-->
-      Recommendation goes here
+      <ul>
+      {% for sol in solutions %}
+        {{ sol|safe }}
+      {% endfor %}
+      <ul>
     </div>
     
     
     <!--Footprint-->
     <div class="footprint">
       <!--Footprint-->
-      <p class="label">Your Carbon Footprint<br></p>
+      <p class="label">Your Carbon Footprint is<br></p>
       <img class="fimg" src="{{ footprint_image }}" alt="Footprint Image">
+      {% if recent.daily %}
       <p class="value">{{'%0.2f'| format(recent.daily|float)}} kg per day</value>
       <p class="mini">{{ relative }}</p>
+      {% else %}
+      <p class="mini">You haven't calculated your footprint yet</p>
+      {% endif %}
     </div>
     
     
     <!--Graph-->
     <div class="graph">
       <!--Graph-->
-      <img class="plt" src="{{ plot_string }}">
+      <img class="plt" src="{{ plot_time }}">
     </div>
     
     

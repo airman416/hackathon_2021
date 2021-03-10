@@ -9,15 +9,6 @@
 </head>
 
 <body>
-    {% for c in cf %}
-        Energy: {{ c.energy }}<br>
-        Food: {{ c.food }}<br>
-        Transport: {{ c.transport }}<br>
-        Yearly: {{ c.yearly }}<br>
-        <br><br><br>
-    {% endfor %}
-
-
     {% from '_reusableForm.html' import render_field %}
     <form action='/quiz' method="POST">
         {{ form.csrf_token }}

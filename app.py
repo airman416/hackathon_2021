@@ -78,12 +78,24 @@ class QuizForm(FlaskForm):
 @app.route('/')
 def home_page():
     recent = Footprint.query.order_by(Footprint.date_added.desc()).first()              # most recent carbon footprint
+    #Tabs
+    plot_overview = plotOverview(recent)                                                # get image of plot for overview
+    # Footprint
     footprint_image = os.path.join(app.config['UPLOAD_FOLDER'], 'footprint_image.png')  # footprint image
-    relative = compareCF(recent.yearly)                                                 # comparison to average (x% above/below average)
-    
-    cfs = Footprint.query.order_by(Footprint.date_added.desc()).all()                   # all carbon footprints
-    plot_string = plot(cfs)                                                             # get image of plot
-    return render_template('home.html', recent=recent, footprint_image=footprint_image, relative=relative, plot_string=plot_string)
+    relative = compareCF(recent)                                                        # comparison to Japan average (x% above/below average)
+    # Recommendations
+    solutions = recommend(recent)
+    cfs = Footprint.query.order_by(Footprint.date_added.desc()).all()[:20]              # 20 most recent carbon footprints
+    plot_time = plotTime(cfs)                                                           # get image of plot for time vs footprint
+    return render_template(
+        'home.html', 
+        solutions=solutions, 
+        recent=recent, 
+        footprint_image=footprint_image, 
+        relative=relative, 
+        plot_overview=plot_overview, 
+        plot_time=plot_time
+    )
 
 
 
@@ -99,10 +111,10 @@ def quiz_page():
         cf = Footprint(energy=footprint["Energy"], food=footprint["Food"], transport=footprint["Transport"], daily=daily, yearly=yearly, form=result)
         db.session.add(cf)
         db.session.commit()
-        return redirect(url_for('quiz_page'))
+        return redirect(url_for('home_page'))
     
     cf = Footprint.query.order_by(Footprint.date_added.desc()).all()
-    return render_template('quiz.html', form=form, cf=cf)
+    return render_template('quiz.html', form=form)
 
 
 @app.route('/products', methods=['GET'])
