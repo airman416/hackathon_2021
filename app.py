@@ -111,10 +111,10 @@ def quiz_page():
         cf = Footprint(energy=footprint["Energy"], food=footprint["Food"], transport=footprint["Transport"], daily=daily, yearly=yearly, form=result)
         db.session.add(cf)
         db.session.commit()
-        return redirect(url_for('quiz_page'))
+        return redirect(url_for('home_page'))
     
     cf = Footprint.query.order_by(Footprint.date_added.desc()).all()
-    return render_template('quiz.html', form=form, cf=cf)
+    return render_template('quiz.html', form=form)
 
 
 @app.route('/products', methods=['GET'])
