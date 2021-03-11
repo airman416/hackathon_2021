@@ -17,6 +17,7 @@ This project allows for calculation, tracking, and education of individual's sus
 # Technologies/Software/Programming Languages used:
 Python
     Flask
+    Matplotlib
 HTML 
 CSS
 
