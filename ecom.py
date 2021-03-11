@@ -6,7 +6,6 @@ soup = BeautifulSoup(page.content, 'html.parser')
 
 def retrieve_product_name():
     name =  [i.text for i in soup.find_all('div', class_='thar__title1', text=True)]
-    print(name)
     image = [i.attrs['src'] for i in soup.find_all('img', class_='thar__img') if i.attrs['src'] != 
             'https://cdn.trendhunterstatic.com/icons/tha/lazyplaceholder.jpeg']
 

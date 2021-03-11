@@ -9,7 +9,11 @@ body {
 h1 {
   color: white;
   font-weight: 800;
-  text-align: center;
+}
+
+h4 {
+  color: white;
+  font-weight: 600;
 }
 
 
@@ -21,6 +25,29 @@ h1 {
   padding: 2%;
 
   background: rgb(52, 58, 64);
+}
+
+.quiz {
+  padding-top: 3vh;
+  padding-bottom: 3vh;
+  padding: 2%;
+  background: rgb(52, 58, 64); 
+  height: auto;
+}
+
+.products {
+  padding-top: 3vh;
+  padding-bottom: 3vh;
+  padding: 2%;
+  background: rgb(52, 58, 64); 
+  height: auto;
+}
+
+.product_image {
+}
+
+figcaption {
+  color: white;
 }
 
 
@@ -138,6 +165,35 @@ h1 {
   background: #f5f5f5;
   border-radius: 1vw;
   box-shadow: 0.5vw 0.5vw 0.2vw 0.2vw rgba(0, 0, 0, 0.2);
+}
+
+.suggestion li {
+  width: 30vw;
+  margin: 0.5vw auto;
+  padding: 0.8vw;
+  list-style-type: none;
+
+  font-size: 1vw;
+  border-radius: 1vw;
+}
+
+.suggestion .energy {
+  background: rgb(231, 102, 109);
+}
+
+.suggestion .food {
+  background: rgb(253, 230, 22);
+}
+
+.suggestion .transport {
+  background: rgb(49, 146, 224);
+}
+
+.suggestion a {
+  color: rgb(92, 28, 185);
+  font-weight: 500;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 
