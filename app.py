@@ -76,10 +76,12 @@ class QuizForm(FlaskForm):
 
 """----------------------------------------Webpage and Rendering----------------------------------------"""
 @app.route('/')
+@app.route('/home')
 def home_page():
     recent = Footprint.query.order_by(Footprint.date_added.desc()).first()              # most recent carbon footprint
     #Tabs
     plot_overview = plotOverview(recent)                                                # get image of plot for overview
+    percent = calcPercent(recent)                                                       # percentage contribution of each factor
     # Footprint
     footprint_image = os.path.join(app.config['UPLOAD_FOLDER'], 'footprint_image.png')  # footprint image
     relative = compareCF(recent)                                                        # comparison to Japan average (x% above/below average)
@@ -94,7 +96,8 @@ def home_page():
         footprint_image=footprint_image, 
         relative=relative, 
         plot_overview=plot_overview, 
-        plot_time=plot_time
+        plot_time=plot_time,
+        percent=percent,
     )
 
 

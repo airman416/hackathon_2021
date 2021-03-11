@@ -13,11 +13,16 @@
 </head>
 
 <body>
+  
   <div class="pad">
-    <!--Title-->
-    <h1>Placeholder Product name</h1>
+    <div class="d-flex justify-content-between">
+      
+      <h4><a href="{{ url_for('quiz_page') }}" class="text-white">Measure your footprint!</a></h4>
+      <h1>Placeholder Product name</h1>
+      <h4><a href="{{ url_for('products') }}" class="text-white">Products page!</a></h4>
+    </div>
     
-
+    
     <!--Tabs-->
     <div class="tabs">
       <!--Tab Buttons-->
@@ -35,9 +40,18 @@
           <!--Overview Content-->
           <img class="plt" src="{{ plot_overview }}">
         </div>
-        <div class="tab-pane fade" id="nav-energy" role="tabpanel" aria-labelledby="nav-energy-tab">Energy Content</div>
-        <div class="tab-pane fade" id="nav-food" role="tabpanel" aria-labelledby="nav-food-tab">Food Content</div>
-        <div class="tab-pane fade" id="nav-transport" role="tabpanel" aria-labelledby="nav-transport-tab">Transport Content</div>
+        <div class="tab-pane fade" id="nav-energy" role="tabpanel" aria-labelledby="nav-energy-tab">
+          <p>Energy accounts for 27% of the global greenhouse gas emissions, with a huge proportion of emissions arising from the burning of fossil fuels. Although the amount of greenhouse gas produced per kWH depends per country, our website uses the conversion rate of 0.465kg per kWH based on Japan’s statistics.</p>
+          <p>Carbon emissions arising from the use of energy can be decreased by using less electricity and improving efficiency. Overall, energy accounts for {{ percent['Energy'] }}% of your carbon footprint.</p>
+        </div>
+        <div class="tab-pane fade" id="nav-food" role="tabpanel" aria-labelledby="nav-food-tab">
+          <p>Food is a large contributor to the world’s carbon emission, accounting for roughly 10% of all emission. Most of this emission comes from farm animals such as cows and sheep. These animals can release methane – a gas 84 times more potent than carbon dioxide – and require additional energy to supply the facilities.</p>
+          <p>Carbon emissions arising from agriculture and food can be decreased by changing your diet to include more grains and beans than meat. Overall, food accounts for {{ percent['Food'] }}% of your carbon footprint.</p>
+        </div>
+        <div class="tab-pane fade" id="nav-transport" role="tabpanel" aria-labelledby="nav-transport-tab">
+          <p>Transport is the largest contributor to the world’s greenhouse gas emissions, accounting for 28% of global emissions. Over 90% of transportation is petroleum based, which means that it releases a ton of carbon dioxide when it is burnt to produce energy. Heavy cargo ships and trucks especially release a lot of carbon dioxide along with other toxic gasses such as nitrous oxide.</p>
+          <p>Carbon emissions arising from the use of transport can be decreased by purchasing locally produced products and using public transport. Overall, transport accounts for {{ percent['Transport'] }}% of your carbon footprint.</p>
+        </div>
       </div>
     </div>
     
@@ -52,23 +66,23 @@
     <div class="suggestion">
       <!--Suggestion-->
       <ul>
-      {% for sol in solutions %}
+        {% for sol in solutions %}
         {{ sol|safe }}
-      {% endfor %}
+        {% endfor %}
       <ul>
     </div>
-    
-    
+        
+        
     <!--Footprint-->
     <div class="footprint">
       <!--Footprint-->
       <p class="label">Your Carbon Footprint is<br></p>
       <img class="fimg" src="{{ footprint_image }}" alt="Footprint Image">
       {% if recent.daily %}
-      <p class="value">{{'%0.2f'| format(recent.daily|float)}} kg per day</value>
-      <p class="mini">{{ relative }}</p>
+        <p class="value">{{'%0.2f'| format(recent.daily|float)}} kg per day</value>
+        <p class="mini">{{ relative }}</p>
       {% else %}
-      <p class="mini">You haven't calculated your footprint yet</p>
+        <p class="mini">You haven't calculated your footprint yet</p>
       {% endif %}
     </div>
     
@@ -78,8 +92,8 @@
       <!--Graph-->
       <img class="plt" src="{{ plot_time }}">
     </div>
-    
-    
+  
+  
   </div>
 </body>
 </html>

@@ -1,7 +1,15 @@
 import matplotlib.pyplot as plt
 import io
 import base64
+import random
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+
+# matplotlib plot colors
+OVERALL = "mediumslateblue"
+ENERGY = "orangered"
+FOOD = "gold"
+TRANSPORT = "deepskyblue"
+
 
 def extractForm(form):
     '''
@@ -43,21 +51,37 @@ def calcCF(result):
     return footprint
 
 
-def compareCF(footprint):
+
+def calcPercent(cf):
+    '''
+    Calculates the percentage contribution of each factor
+    '''
+    if cf == None:       # return nothing when there are no entries
+        return {'Energy': 0.0, 'Food': 0.0, 'Transport': 0.0}
+    
+    percent = dict()
+    percent['Energy'] = round(100 * cf.energy / cf.daily, 1)
+    percent['Food'] = round(100 * cf.food / cf.daily, 1)
+    percent['Transport'] = round(100 * cf.transport / cf.daily, 1)
+    return percent
+
+
+
+def compareCF(cf):
     '''
     Compares the footprint relative to Japan's average carbon footprint per person per year
     Average: 9.09 tonnes in 2019
     
-    E.g. If footprint = 8 tonnes
+    E.g. If cf = 8 tonnes
     "13.6% below average"
     
-    If footprint = 12 tonnes
+    If cf = 12 tonnes
     "32.0% above average"
     '''
-    if footprint == None:       # return nothing when there are no entries
+    if cf == None:       # return nothing when there are no entries
         return ""
     
-    percentDiff = round((100 * (footprint.yearly - 9.09)/9.09), 1)     # percentage change to one decimal place
+    percentDiff = round((100 * (cf.yearly - 9.09)/9.09), 1)     # percentage change to one decimal place
     return f"{percentDiff}% above average" if percentDiff >= 0 else f"{-percentDiff}% below average"
 
 
@@ -66,96 +90,66 @@ def recommend(cf):
     '''
     Recommends tips to reduce carbon footprint based on which values are represented the most
     '''
-    #{'nRoom': 5.0, 'nAC': 3.0, 'nPC': 8.0, 'nLarge': 4.0, 'pMeat': 0.5, 'foodCost': 750.0, 'carSize': 0.22, 'nCar': 5.0, 'nPublic': 4.0, 'nPlane': 0.0}
-
-    
     form = cf.form
-    reco = []
-    sug = ""
-    sdg = """<li><a href="https://sdgs.un.org/goals" target="_blank">Visit the UN SDGs Page!</a></li>"""
-    urg=0 #sclae of 1~ to apply a level to decide which suggestion to show
-
-    if urg <= (form['nAC']/3 +1):
-        sug="""
-                <li>Close curtains to prevent energy loss </li> 
-                <li>Create shade around your home</li>
-                <li>Use a fan instead of AC</li>
-                <li>Insulate your home</li>
-                <li>Upgrade your windows</li>
-                <li>Raise the target temperature when you are not home</li>
-                <a href="<a href="https://www.economist.com/leaders/2018/08/25/how-to-make-air-conditioning-more-sustainable" target="_blank"> Want to know more?</a>
-            """
-        urg=(form['nAC']/3 +1)
-            
-
-    if urg <= (form['nPC']/2):
-        sug="""
-                <li>Reduce monitor brightness</li>
-                <li>Set the computer to sleep when not used</li>
-                <li>Set the computer's mode to battery saving scheme</li>
-                <li>Use a software</li> <a href="<a href="https://download.cnet.com/PowerSlave/3000-2094_4-10921574.html" target="_blank"> (ie PowerSlave) </a> to shutdown at certain times</li>
-                <li>Close softwares that you are not using</li>
-                <li>Underclock the computer components</li>
-                <a href="https://www.techradar.com/news/computing/pc/the-ultimate-guide-to-reducing-your-pc-s-power-consumption-661978/3" target="_blank">Want to know more? </a>
-            """
-        urg=(form['nPC']/2)
-
-    if urg <= (form['nLarge']*2):
-        sug="""
-                <li>Clean your refrigerator</li>
-                <li>Reorganize your refrigerator</li>
-                <li>Run the washing machine in large quantities</li>
-                <li>Run the washing machine with cold water</li>
-                <li>Opt for an energy certified <a href="https://www.energystar.gov/" target="_blank"> (ie ENERGY STAR) </a> electric furniture</li>
-                <li>Opt for a water and electric efficient furniture <a href="https://www.energystar.gov/products/most_efficient" target="_blank">(ie showerhead, dish washer, cloth washer)</a></li>
-                <a href="https://www.treehugger.com/how-to-go-green-in-the-kitchen-4858697" target="_blank">Want to know more?</a>
-            """    
-        urg=(form['nLarge']*2)
-
-
-    if urg <= (form['pMeat']*10 + 3):
-        sug="""
-                <li>Experiment with new grains, vegetables and <a href="https://www.allrecipes.com/recipes/87/everyday-cooking/vegetarian/" target="_blank">recipes</a></li>
-                <li>Bulk up meat dishes with beans, grains or vegetable</li>
-                <li>Try substituting your favourite foods for meat free versions</li>
-                <li>Look to the cuisines of countries with well-known vegetarian dishes</li>
-                <li><a href="https://www.sustainweb.org/sustainablefood/meat_and_dairy_products_less_is_more/" target="_blank">Try going meat free for one day a week</a></li>
-                <li>Buy meat on the bone</li>
-                <a href="https://www.treehugger.com/strategies-reducing-meat-your-diet-4852990" target="_blank">Want to know more?</a>
-            """  
-        urg = (form['pMeat']*10 + 3)
-
-
-    if urg <= (form['nPlane']*2 + 2):
-        sug="""
-                <li>Choose non-stop flights</li>
-                <li>Fly Economy or Coach</li>
-                <li>Try to avoid flying</li>
-                <li><a href="https://thepointsguy.com/guide/everything-you-need-to-know-carbon-offsetting-flights/" target="_blank"> Offset your emissions</a></li>
-                <li>Use other means of transportation</li>
-                <li><a href="https://www.nytimes.com/2017/07/27/climate/airplane-pollution-global-warming.html" target="_blank">Learn the effects of flying </a></li>
-                <a href="https://www.pbs.org/newshour/science/these-7-simple-airplane-fixes-could-halve-carbon-emissions-at-little-to-no-cost" target="_blank"> Want to know more?</a>
-            """
-        urg = (form['nPlane']*2 + 2)
-
-
-
-    if urg <= (form['nCar']/2):
-        sug="""
-                <li>Use a cleaning agent <a href="https://youtu.be/9RXY8TRMMzs" target="_blank">(Video)</a></li>
-                <li>Change the engine oil <a href="https://www.rac.co.uk/drive/advice/car-maintenance/how-to-check-your-oil/" target="_blank">(How?)</a></li>
-                <li>Change the air filter</li>
-                <li>Optimize your tyre pressure <a href="https://youtu.be/IFbx6INKc2Y" target="_blank">(How?)</a></li>
-                <li>Reduce the use of car AC</li>
-                <li>Avoid constant breaking and accelerating</li>
-                <li>Reduce idle time</li>
-                <li>Refrain from driving</li>
-                <a href="https://www.epa.gov/transportation-air-pollution-and-climate-change/what-you-can-do-reduce-pollution-vehicles-and-engines" target="_blank">Want to know more? </a>
-            """
-        urg = ()
-
-    reco=[sug, sdg]
-    return reco
+    tips = []
+    
+    urglist = {     # weight of each factors
+        'nRoom': form['nRoom']*2,
+        'nAC': form['nAC']/3 + 1,
+        'nPC': form['nPC']/2,
+        'nLarge': form['nLarge']*2,
+        'pMeat': form['pMeat']*10 + 3,
+        'nPlane': form['nPlane']*2 + 2,
+        'nCar': form['nCar']/2
+    }
+    urg = max(urglist, key=urglist.get) # most important factors
+    
+    if form['nRoom'] >= 4 or urg == 'nRoom':
+        tips.append("""<li class="energy">Only turn on the AC in one room at a time</li>""")
+    
+    if form['nAC'] >= 10 or urg == 'nAC':
+        tips.append("""<li class="energy">Close the curtains to reduce heat loss</li>""")
+        tips.append("""<li class="energy">Close the doors when using the AC</li>""")
+        tips.append("""<li class="energy"><a href=""https://www.appropedia.org/How_to_cool_a_room_with_water target="_blank">Place a bowl of water</a> to cool the room</li>""")
+        tips.append("""<li class="energy">Add double glazing to your windows</li>""")
+    
+    if form['nPC'] >= 10 or urg == 'nPC':
+        tips.append("""<li class="energy">Reduce monitor brightness</li>""")
+        tips.append("""<li class="energy">Set the computer to sleep mode when not in use</li>""")
+        tips.append("""<li class="energy">Close softwares that you are not using</li>""")
+        tips.append("""<li class="energy">Use <a href="<a href="https://download.cnet.com/PowerSlave/3000-2094_4-10921574.html" target="_blank">Powerslave</a> to shutdown at certain times</li>""")
+        tips.append("""<li class="energy">Try some of the tips in <a href="https://www.techradar.com/news/computing/pc/the-ultimate-guide-to-reducing-your-pc-s-power-consumption-661978/3" target="_blank">this guide</a></li>""")
+    
+    if form['nLarge'] >= 3 or urg == 'nLarge':
+        tips.append("""<li class="energy">Pull out the plugs of appliances you are not using to prevent <a href="https://massachusetts.revolusun.com/blog/is-ghost-electricity-haunting-your-electric-bill/" target="_blank">ghost electricity<a></li>""")
+        tips.append("""<li class="energy">Run the washing machine in bulk</li>""")
+        tips.append("""<li class="energy"><a href="https://www.organicauthority.com/live-grow/cleaning-a-refrigerator-properly" target="_blank">Clean your refrigerator</a></li>""")
+        tips.append("""<li class="energy">Opt for a water and electric efficient furniture <a href="https://www.energystar.gov/products/most_efficient" target="_blank">(ie showerhead, dish washer, cloth washer)</a></li>""")
+        tips.append("""<li class="energy">Opt for an energy certified <a href="https://www.energystar.gov/" target="_blank"> (ie ENERGY STAR) </a> electric furniture</li>""")
+        tips.append("""<li class="energy">Run the washing machine with cold water</li>""")
+    
+    if form['pMeat'] >= 0.5 or urg == 'pMeat':
+        tips.append("""<li class="food">Experiment with new grains, vegetables and <a href="https://www.allrecipes.com/recipes/87/everyday-cooking/vegetarian/" target="_blank">recipes</a></li>""")
+        tips.append("""<li class="food">Bulk up meat dishes with beans, grains or vegetable</li>""")
+        tips.append("""<li class="food">Try substituting your favourite foods for meat free versions</li>""")
+        tips.append("""<li class="food">Participate in <a href="https://www.mondaycampaigns.org/meatless-monday" target="_blank">Meatless Monday</a></li>""")
+        tips.append("""<li class="food">Look to the cuisines of countries with well-known vegetarian dishes</li>""")
+    
+    if form['nPlane'] >= 3 or urg == 'nPlane':
+        tips.append("""<li class="transport">Use non-stop flights</li>""")
+        tips.append("""<li class="transport">Fly economy or coach on planes</li>""")
+        tips.append("""<li class="transport"><a href="https://thepointsguy.com/guide/everything-you-need-to-know-carbon-offsetting-flights/" target="_blank"> Offset your flight emissions</a></li>""")
+        tips.append("""<li class="transport">Use public transports such as busses and trains</li>""")
+        tips.append("""<li class="transport"><a href="https://www.nytimes.com/2017/07/27/climate/airplane-pollution-global-warming.html" target="_blank">Learn the effects of flying</a></li>""")
+    
+    if form['nCar'] >= 4 or urg == 'nCar':
+        tips.append("""<li class="transport">Use a <a href="https://youtu.be/9RXY8TRMMzs" target="_blank">cleaning agent</a> for your cars</li>""")
+        tips.append("""<li class="transport">Change your <a href="https://www.rac.co.uk/drive/advice/car-maintenance/how-to-check-your-oil/" target="_blank">engine oil</a></li>""")
+        tips.append("""<li class="transport">Avoid constant breaking and accelerating when on your car</li>""")
+        tips.append("""<li class="transport">Reduce the idle time of your cars</li>""")
+        tips.append("""<li class="transport">Optimize your <a href="https://youtu.be/IFbx6INKc2Y" target="_blank">tire pressure</a></li>""")
+    
+    return random.sample(tips, min(len(tips), 10))  # pick up to 10 random tips
 
 
 
@@ -188,10 +182,10 @@ def plotTime(cfs):
     # plot the graph
     fig, ax = plt.subplots()
     fig.set_size_inches(12.5, 4)
-    ax.plot(dates, daily_values, color='blueviolet', label='Total')
-    ax.plot(dates, energy_values, color='firebrick', label='Energy')
-    ax.plot(dates, food_values, color='gold', label='Food')
-    ax.plot(dates, transport_values, color='steelblue', label='Transport')
+    ax.plot(dates, daily_values, color=OVERALL, label='Total')
+    ax.plot(dates, energy_values, color=ENERGY, label='Energy')
+    ax.plot(dates, food_values, color=FOOD, label='Food')
+    ax.plot(dates, transport_values, color=TRANSPORT, label='Transport')
     ax.set_ylabel("Footprint (kg per day)")
     ax.set_xlabel("Date")
     ax.legend(bbox_to_anchor=(0, 0, 1, 1), loc='upper left')
@@ -213,14 +207,14 @@ def plotOverview(cf):
     energy = cf.energy
     food = cf.food
     transport = cf.transport
-    
+
     # plot the graph
     fig, ax = plt.subplots()
     fig.set_size_inches(10, 6)
     
-    ax.bar(date, energy, color='firebrick', label='Energy')
-    ax.bar(date, food, color='gold', label='Food')
-    ax.bar(date, transport, color='steelblue', label='Transport')
+    ax.bar(date, transport, color=TRANSPORT, label='Transport')
+    ax.bar(date, food, color=FOOD, label='Food', bottom=transport)
+    ax.bar(date, energy, color=ENERGY, label='Energy', bottom=food+transport)
     ax.set_ylabel("Footprint (kg per day)")
     ax.set_xticks([])   # Hide xticks
     ax.legend(bbox_to_anchor=(0, 0, 1, 1), loc='upper left')
