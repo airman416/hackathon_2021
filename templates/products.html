@@ -13,9 +13,9 @@
 <body>
     <div class="products">
         <div class="mx-auto d-flex justify-content-between">
-            <h4><a href="{{ url_for('home_page') }}" class="text-white">Back home!</a></h4>
-            <h1>Placeholder Product name</h1>
-            <h4><a href="{{ url_for('quiz_page') }}" class="text-white">Quiz page!</a></h4>
+            <p class="pagelink"><a href="{{ url_for('home_page') }}" class="text-white">Back home!</a></p>
+            <p class="product">{{ name }}</p>
+            <p class="pagelink"><a href="{{ url_for('quiz_page') }}" class="text-white">Quiz page!</a></p>
         </div>
         <div class="box">
             <ul id="product">

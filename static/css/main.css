@@ -6,13 +6,17 @@ body {
   font-family: 'Arimo', 'Open Sans', "Courier New", Courier, monospace;
 }
 
-h1 {
+.product {
   color: white;
+  font-size: 3vw;
+  line-height: 3vw;
   font-weight: 800;
 }
 
-h4 {
+.pagelink {
   color: white;
+  font-size: 1.5vw;
+  line-height: 1.5vw;
   font-weight: 600;
 }
 
@@ -43,8 +47,7 @@ h4 {
   height: auto;
 }
 
-.product_image {
-}
+
 
 figcaption {
   color: white;
@@ -83,6 +86,7 @@ figcaption {
 .tab-content {
   height: 31.2vw;
   padding: 2%;
+  overflow-y: scroll;
 
   font-size: 1vw;
   
@@ -94,6 +98,10 @@ figcaption {
 .tab-content .plt {
   height: 29vw;
   margin: auto;
+}
+
+.tab-content .sdg {
+  width: 10vw;
 }
 
 

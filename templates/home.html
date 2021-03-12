@@ -17,9 +17,9 @@
   <div class="pad">
     <div class="d-flex justify-content-between">
       
-      <h4><a href="{{ url_for('quiz_page') }}" class="text-white">Measure your footprint!</a></h4>
-      <h1>Placeholder Product name</h1>
-      <h4><a href="{{ url_for('products') }}" class="text-white">Products page!</a></h4>
+      <p class="pagelink"><a href="{{ url_for('quiz_page') }}" class="text-white">Measure your footprint!</a></p>
+      <p class="product">{{ name }}</p>
+      <p class="pagelink"><a href="{{ url_for('products') }}" class="text-white">Products page!</a></p>
     </div>
     
     
@@ -43,14 +43,51 @@
         <div class="tab-pane fade" id="nav-energy" role="tabpanel" aria-labelledby="nav-energy-tab">
           <p>Energy accounts for 27% of the global greenhouse gas emissions, with a huge proportion of emissions arising from the burning of fossil fuels. Although the amount of greenhouse gas produced per kWH depends per country, our website uses the conversion rate of 0.465kg per kWH based on Japan’s statistics.</p>
           <p>Carbon emissions arising from the use of energy can be decreased by using less electricity and improving efficiency. Overall, energy accounts for {{ percent['Energy'] }}% of your carbon footprint.</p>
+          <p>UN <a href="https://sdgs.un.org/goals/goal7">Energy</a> Targets:</p>
+          <ul>
+            <li>By 2030, ensure universal access to affordable, reliable and modern energy services</li>
+            <li>By 2030, double the global rate of improvement in energy efficiency</li>
+          </ul>
+          <p>Current Progress on Energy Sustainability:<p>
+            <ul>
+              <li>The global electrification rate rose, from 83 per cent in 2010 to 90 per cent by 2018</li>
+              <li> The world’s deficit was increasingly concentrated in sub-Saharan Africa, where some 548 million persons, or 53 per cent of the population, lacked access to electricity</li>
+            </ul>
+          <img class="sdg" src="/static/images/energy.png" alt="SDGs Energy">
         </div>
         <div class="tab-pane fade" id="nav-food" role="tabpanel" aria-labelledby="nav-food-tab">
           <p>Food is a large contributor to the world’s carbon emission, accounting for roughly 10% of all emission. Most of this emission comes from farm animals such as cows and sheep. These animals can release methane – a gas 84 times more potent than carbon dioxide – and require additional energy to supply the facilities.</p>
           <p>Carbon emissions arising from agriculture and food can be decreased by changing your diet to include more grains and beans than meat. Overall, food accounts for {{ percent['Food'] }}% of your carbon footprint.</p>
+          <p>UN <a href="https://sdgs.un.org/goals/goal12">Consumption</a> and <a href="https://sdgs.un.org/goals/goal2">Hunger</a> Targets:</p>
+          <ul>
+            <li>By 2030, achieve the sustainable management and efficient use of natural resources</li>
+            <li>By 2030, end hunger and ensure access by all people, in particular the poor and people in vulnerable situations, including infants, to safe, nutritious and sufficient food all year round</li>
+          </ul>
+          <p>Current Progress on Consumption and Hunger Sustainability:<p>
+            <ul>
+              <li>As at 2019, 79 countries and the European Union reported on at least one national policy instrument that contributed to sustainable consumption and production in their efforts towards the implementation of the 10-Year Framework of Programmes on Sustainable Consumption and Production Patterns</li>
+              <li>The total number of persons suffering from severe food insecurity has been on the rise since 2015, and there are still millions of malnourished children</li>
+            </ul>
+          <img class="sdg" src="/static/images/food.png" alt="SDGs Consumption">
+          <img class="sdg" src="/static/images/hunger.png" alt="SDGs Hunger">
+
         </div>
         <div class="tab-pane fade" id="nav-transport" role="tabpanel" aria-labelledby="nav-transport-tab">
           <p>Transport is the largest contributor to the world’s greenhouse gas emissions, accounting for 28% of global emissions. Over 90% of transportation is petroleum based, which means that it releases a ton of carbon dioxide when it is burnt to produce energy. Heavy cargo ships and trucks especially release a lot of carbon dioxide along with other toxic gasses such as nitrous oxide.</p>
           <p>Carbon emissions arising from the use of transport can be decreased by purchasing locally produced products and using public transport. Overall, transport accounts for {{ percent['Transport'] }}% of your carbon footprint.</p>
+          <p>UN <a href="https://sdgs.un.org/goals/goal11">Cities</a> and <a href="https://sdgs.un.org/goals/goal9">Infrastructure</a> Targets:</p>
+          <ul>
+            <li>By 2030, ensure access for all to adequate, safe and affordable housing and basic services and upgrade slums</li>
+            <li>Develop quality, reliable, sustainable and resilient infrastructure, including regional and transborder infrastructure, to support economic development and human well-being, with a focus on affordable and equitable access for all</li>
+          </ul>
+          <p>Current Progress on Cities and Infrastructure:<p>
+            <ul>
+              <li>The pandemic will hit the hardest the more than 1 billion slum dwellers worldwide, who suffer from a lack of adequate housing, no running water at home, shared toilets, few or no waste management systems, overcrowded public transport and limited access to formal health-care facilities</li>
+              <li>The share of manufacturing in GDP in least developed countries increased, from 10 per cent in 2010 to 12.4 per cent in 2019, but the growth rate was too slow for the target, doubling the industry’s share in GDP by 2030, to be reached</li>
+            </ul>
+          <img class="sdg" src="/static/images/cities.png" alt="SDGs Cities">
+          <img class="sdg" src="/static/images/infra.png" alt="SDGs Infrastrucutre">
+          
         </div>
       </div>
     </div>
@@ -77,7 +114,7 @@
     <div class="footprint">
       <!--Footprint-->
       <p class="label">Your Carbon Footprint is<br></p>
-      <img class="fimg" src="{{ footprint_image }}" alt="Footprint Image">
+      <img class="fimg" src="/static/images/footprint_image.png" alt="Footprint Image">
       {% if recent.daily %}
         <p class="value">{{'%0.2f'| format(recent.daily|float)}} kg per day</value>
         <p class="mini">{{ relative }}</p>

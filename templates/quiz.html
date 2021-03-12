@@ -14,9 +14,9 @@
     <div class="quiz">
         <!-- <h1 style="text-align: center;">Placeholder Product name</h1> -->
         <div class="mx-auto d-flex justify-content-between">
-            <h4><a href="{{ url_for('home_page') }}" class="text-white">Back home!</a></h4>
-            <h1>Placeholder Product name</h1>
-            <h4><a href="{{ url_for('products') }}" class="text-white">Products page!</a></h4>
+            <p class="pagelink"><a href="{{ url_for('home_page') }}" class="text-white">Back home!</a></p>
+            <p class="product">{{ name }}</p>
+            <p class="pagelink"><a href="{{ url_for('products') }}" class="text-white">Products page!</a></p>
         </div>
         <div class="min-vh-100 d-flex justify-content-center d-grid gap-3">
             {% from '_reusableForm.html' import render_field %}

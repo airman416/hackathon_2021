@@ -11,10 +11,11 @@ from ecom import retrieve_product_name
 
 
 """------------------------------------Initializing App and Database------------------------------------"""
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 app.config['SECRET_KEY'] = '256808a4404917c4e708d093936b2ccb'
 app.config['UPLOAD_FOLDER'] = os.path.join('static', 'images')
+NAME = "Sustabilize"
 db = SQLAlchemy(app)
 
 
@@ -83,7 +84,6 @@ def home_page():
     plot_overview = plotOverview(recent)                                                # get image of plot for overview
     percent = calcPercent(recent)                                                       # percentage contribution of each factor
     # Footprint
-    footprint_image = os.path.join(app.config['UPLOAD_FOLDER'], 'footprint_image.png')  # footprint image
     relative = compareCF(recent)                                                        # comparison to Japan average (x% above/below average)
     # Recommendations
     solutions = recommend(recent)
@@ -93,11 +93,11 @@ def home_page():
         'home.html', 
         solutions=solutions, 
         recent=recent, 
-        footprint_image=footprint_image, 
         relative=relative, 
         plot_overview=plot_overview, 
         plot_time=plot_time,
         percent=percent,
+        name=NAME,
     )
 
 
@@ -117,13 +117,21 @@ def quiz_page():
         return redirect(url_for('home_page'))
     
     cf = Footprint.query.order_by(Footprint.date_added.desc()).all()
-    return render_template('quiz.html', form=form)
+    return render_template(
+        'quiz.html', 
+        form=form,
+        name=NAME,
+    )
 
 
 @app.route('/products', methods=['GET'])
 def products():
     product_data = retrieve_product_name()
-    return render_template('products.html', product_data=product_data)
+    return render_template(
+        'products.html',
+        product_data=product_data,
+        name=NAME,
+    )
 
 
 
